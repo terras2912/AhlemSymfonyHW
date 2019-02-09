@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Expererience{% endblock %}
+
+{% block body %}
+    <h1>Create new Expererience</h1>
+
+    {{ include('expererience/_form.html.twig') }}
+
+    <a href="{{ path('expererience_index') }}">back to list</a>
+{% endblock %}
