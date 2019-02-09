@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Form\CompanyType;
+use App\Services\MyMailer;
+use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +19,16 @@ class CompanyController extends AbstractController
     /**
      * @Route("/", name="company_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(MyMailer $mailer): Response
     {
-        $companies = $this->getDoctrine()
+       $companies = $this->getDoctrine()
             ->getRepository(Company::class)
             ->findAll();
+       //$myMailer=new MyMailer(new \Swift_Mailer(),new Logger());
+        //Objectif
+       //$myMailer=$this->container->get('my_mailer');
+        $mailer->sendEmail();
+
 
         return $this->render('company/index.html.twig', [
             'companies' => $companies,
